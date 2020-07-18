@@ -1,4 +1,4 @@
-import styles from '../css/Layout.module.css'
+import styles from './css/Layout.module.css'
 
 const Layout = ({ children }) => {
   return <div className={styles.container}>{children}</div>;

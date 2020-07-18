@@ -1,0 +1,21 @@
+.createToDoContainer {
+  /* border: 2px solid; */
+  width: 400px;
+  /* height: 160px; */
+}
+
+.inputContainer {
+  /* border: 2px solid; */
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.inputBox {
+  width: 100%;
+}
+
+
+.button {
+  margin-top: 20px;
+}

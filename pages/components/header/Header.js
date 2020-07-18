@@ -1,9 +1,8 @@
 import React from 'react'
-import styles from '../css/Header.module.css'
+import styles from './css/Header.module.css'
 import Typography from "@material-ui/core/Typography";
 
-const Header = ({data}) => {
-  console.log(data)
+const Header = ({}) => {
   return (
     <div className={styles.headerContainer}>
       <Typography variant="h4">Welcome to InfoCasas Test</Typography>
