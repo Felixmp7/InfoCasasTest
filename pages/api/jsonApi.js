@@ -1,8 +1,7 @@
-export const createNewTodo = async (title, body) => {
+export const createNewTodo = async (title) => {
 
   const data = {
     title,
-    body,
     userId: 1,
   };
   
