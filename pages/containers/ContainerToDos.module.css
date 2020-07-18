@@ -1,0 +1,15 @@
+.todosContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.containerToDoList {
+  /* border: 2px solid; */
+}
+
+.todoList {
+  max-height: 70vh;
+  overflow: auto;
+}
