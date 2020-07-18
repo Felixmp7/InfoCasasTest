@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import Header from './components/Header'
-import CreateTodo from "./components/CreateTodo";
-import TodoList from "./components/TodoList";
-import Layout from './components/Layout'
+import Header from './components/header/Header'
+import ContainerToDos from './containers/ContainerToDos';
+import Layout from './components/layout/Layout'
 
 export async function getStaticProps() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
@@ -11,7 +10,7 @@ export async function getStaticProps() {
   console.log(todos);
 
   return {
-    props: { todos }, // will be passed to the page component as props
+    props: { todos: todos.slice(0,4) }, // will be passed to the page component as props
   };
 }
 
@@ -24,11 +23,14 @@ const HomePage = ({todos}) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
         <title>InfoCasas Test</title>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <CreateTodo />
-      <TodoList />
+      <ContainerToDos todos={todos} />
     </Layout>
   );
 }
