@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Header from './components/header/Header'
 import ContainerToDos from './containers/ContainerToDos';
-import Layout from './components/layout/Layout'
 
 export async function getStaticProps() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
@@ -16,7 +15,7 @@ export async function getStaticProps() {
 
 const HomePage = ({todos}) => {
   return (
-    <Layout>
+    <>
       <Head>
         <meta
           name="viewport"
@@ -31,7 +30,7 @@ const HomePage = ({todos}) => {
       </Head>
       <Header />
       <ContainerToDos todos={todos} />
-    </Layout>
+    </>
   );
 }
 
