@@ -9,6 +9,7 @@ import { ToDoItem } from "../components/todo_list/ToDoItem";
 export default class ContainerToDos extends Component {
   state = {
     todos:[],
+    todosFiltered:[],
     lastTask: 0,
     searchInput: ''
   }
@@ -40,53 +41,99 @@ export default class ContainerToDos extends Component {
   }
 
   updateTodo = (id) => {
-    const { todos } = this.state;
-    const todosUpdated = todos.map(todo => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed
-      }
-      return todo;
-    })
-    this.setState({todos: todosUpdated});
+    const { todos, todosFiltered, searchInput } = this.state;
+
+    if (searchInput) {
+      console.log('Con Búsqueda')
+      const todosFilteredUpdated = todosFiltered.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      });
+      this.setState({
+        todosFiltered: todosFilteredUpdated,
+      });
+    } 
+    else {
+      console.log("Sin Búsqueda");
+
+      const todosUpdated = todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed
+        }
+        return todo;
+      })
+      this.setState({
+        todos: todosUpdated,
+      });
+    }
   }
 
   deleteToDo = (id) => {
-    const { todos } = this.state;
+    const { todos, todosFiltered } = this.state;
     const todoForDelete = todos.findIndex( todo => todo.id === id);
     todos.splice(todoForDelete, 1);
+
+    const todoFilteredForDelete = todosFiltered.findIndex( todo => todo.id === id);
+    todosFiltered.splice(todoFilteredForDelete, 1);
+
     // console.log(todos);
-    this.setState({todos});
+    this.setState({todos, todosFiltered});
   }
 
   handleSearch = (e) => {
+    const text = e.target.value
+    // console.log(e.target.value)
     this.setState({
-      searchInput: e.target.value
+      searchInput: text
+    }, () => {
+      const { todos } = this.state;
+      const todosFiltered = todos.filter((todo) => {
+        return todo.title.toLowerCase().includes(text.toLowerCase());
+      });
+      this.setState({ todosFiltered });
     })
   }
 
   render() {
-    const { todos, searchInput } = this.state;
+    const { todos, searchInput, todosFiltered } = this.state;
 
     return (
       <div className={styles.todosContainer}>
-        <CreateTodo updateToDoInState={this.createToDo} />
+        <div className={styles.leftColumnContainer}>
+          <SearchBar value={searchInput} handleSearch={this.handleSearch} />
+          <CreateTodo updateToDoInState={this.createToDo} />
+        </div>
         <div className={styles.containerToDoList}>
           <Typography variant="h6">Todo List</Typography>
-          <SearchBar value={searchInput} handleSearch={this.handleSearch}/>
+
           <List
             className={styles.todoList}
             component="nav"
             aria-label="main mailbox folders"
           >
-            {todos.length > 0 &&
-              todos.map((todo) => (
-                <ToDoItem
-                  key={todo.id}
-                  data={todo}
-                  updateTodo={this.updateTodo}
-                  deleteToDo={this.deleteToDo}
-                />
-              ))}
+            {todosFiltered.length > 0
+              ? todosFiltered.map((todo) => (
+                  <ToDoItem
+                    key={todo.id}
+                    data={todo}
+                    updateTodo={this.updateTodo}
+                    deleteToDo={this.deleteToDo}
+                  />
+                ))
+              : searchInput == '' 
+                ? todos.map((todo) => (
+                    <ToDoItem
+                      key={todo.id}
+                      data={todo}
+                      updateTodo={this.updateTodo}
+                      deleteToDo={this.deleteToDo}
+                    />
+                  ))
+                :
+                  <Typography align='center'>Not Todos</Typography>
+            }
           </List>
         </div>
       </div>

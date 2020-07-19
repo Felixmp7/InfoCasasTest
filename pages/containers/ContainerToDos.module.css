@@ -5,8 +5,12 @@
   align-items: center;
 }
 
-.containerToDoList {
+.leftColumnContainer {
   /* border: 2px solid; */
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: space-between;
 }
 
 .todoList {
