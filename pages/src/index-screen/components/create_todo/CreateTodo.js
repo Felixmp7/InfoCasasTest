@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { createNewTodo } from "../../api/jsonApi";
+import { createNewTodo } from "../../../../api/jsonApi";
 import styles from './css/CreateTodo.module.css'
 
 const CreateTodo = ({updateToDoInState}) => {

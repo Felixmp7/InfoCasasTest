@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Header from './components/header/Header'
-import ContainerToDos from './containers/ContainerToDos';
+import Header from './src/index-screen/components/header/Header'
+import ContainerToDos from './src/index-screen/containers/ContainerToDos';
 
 export async function getStaticProps() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
