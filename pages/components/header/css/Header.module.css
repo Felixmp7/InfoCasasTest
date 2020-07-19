@@ -3,7 +3,21 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid lightgray;
   margin: 10px;
   /* border: 2px solid; */
+}
+
+.welcome, .powered {
+  font-family: 'Raleway', sans-serif;
+}
+
+.welcome {
+  font-size: 44px;
+  margin: 0;
+}
+.powered {
+  font-size: 34px;
+  margin: 0;
+  color: #414288;
 }

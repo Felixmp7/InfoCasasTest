@@ -1,5 +1,7 @@
 .cardContainer {
   width: 400px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
   margin-bottom: 10px;
 }
 
@@ -9,7 +11,8 @@
 }
 
 .title {
-  text-align: center;
+  /* border: 1px solid; */
+  /* text-align: center; */
 }
 
 .task {
@@ -22,13 +25,13 @@
 
 .containerButton {
   margin: 0px;
-  /* border: 2px solid; */
   display: flex;
   justify-content: flex-end;
-  /* align-self: flex-end; */
+  /* border: 2px solid; */
+  /* flex-wrap: wrap; */
   /* position: absolute; */
-  top: 5px;
-  right: 5px;
+  /* top: 5px;
+  right: 5px; */
 }
 .containerButton:hover {
   cursor: pointer;

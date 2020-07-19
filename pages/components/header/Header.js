@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './css/Header.module.css'
-import Typography from "@material-ui/core/Typography";
 
 const Header = ({}) => {
   return (
     <div className={styles.headerContainer}>
-      <Typography variant="h4">Welcome to InfoCasas Test</Typography>
-      <Typography variant="h5">{`Powered by <Felix Pacheco/>`}</Typography>
+      <h4 className={styles.welcome}>Welcome to InfoCasas Test</h4>
+      <h5 className={styles.powered}>{`Powered by <Felix Pacheco/>`}</h5>
     </div>
   );
 }

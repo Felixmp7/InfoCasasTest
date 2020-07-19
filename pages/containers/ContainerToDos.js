@@ -15,10 +15,17 @@ export default class ContainerToDos extends Component {
   }
 
   componentDidMount(){
+    this.handleInitialActions();
+  }
+
+  handleInitialActions = () => {
     // console.log(this.props)
     const { todos } = this.props;
     const idTasks = todos.map( todo => todo.id);
     const lastTask = Math.max(...idTasks);
+
+    const todosOrdered = todos.sort((a,b) => b.completed - a.completed)
+    console.log(todosOrdered)
     // console.log(lastTask)
     this.setState({todos, lastTask})
   }
@@ -51,6 +58,10 @@ export default class ContainerToDos extends Component {
         }
         return todo;
       });
+
+      todosFilteredUpdated.sort((a, b) => b.completed - a.completed);
+
+      
       this.setState({
         todosFiltered: todosFilteredUpdated,
       });
@@ -64,6 +75,8 @@ export default class ContainerToDos extends Component {
         }
         return todo;
       })
+      
+      todosUpdated.sort((a, b) => b.completed - a.completed);
       this.setState({
         todos: todosUpdated,
       });
@@ -71,7 +84,7 @@ export default class ContainerToDos extends Component {
   }
 
   deleteToDo = (id) => {
-    const { todos, todosFiltered } = this.state;
+    const { todos, todosFiltered, lastTask } = this.state;
     const todoForDelete = todos.findIndex( todo => todo.id === id);
     todos.splice(todoForDelete, 1);
 
@@ -79,7 +92,11 @@ export default class ContainerToDos extends Component {
     todosFiltered.splice(todoFilteredForDelete, 1);
 
     // console.log(todos);
-    this.setState({todos, todosFiltered});
+    this.setState({
+      todos,
+      todosFiltered,
+      lastTask: todos.length == 0 ? 0 : lastTask
+    });
   }
 
   handleSearch = (e) => {
@@ -94,6 +111,41 @@ export default class ContainerToDos extends Component {
       });
       this.setState({ todosFiltered });
     })
+  }
+
+  editToDo = (text,id) => {
+    const { todos, todosFiltered, searchInput } = this.state;
+
+    if (searchInput) {
+      console.log("Con Búsqueda");
+      const todosFilteredUpdated = todosFiltered.map((todo) => {
+        if (todo.id === id) {
+          todo.title = text;
+        }
+        return todo;
+      });
+
+      todosFilteredUpdated.sort((a, b) => b.completed - a.completed);
+
+      this.setState({
+        todosFiltered: todosFilteredUpdated,
+      });
+    } else {
+      console.log("Sin Búsqueda");
+
+      const todosUpdated = todos.map((todo) => {
+        if (todo.id === id) {
+          todo.title = text;
+        }
+        return todo;
+      });
+
+      todosUpdated.sort((a, b) => b.completed - a.completed);
+      this.setState({
+        todos: todosUpdated,
+      });
+    }
+    // console.log(text,id)
   }
 
   render() {
@@ -120,6 +172,7 @@ export default class ContainerToDos extends Component {
                     data={todo}
                     updateTodo={this.updateTodo}
                     deleteToDo={this.deleteToDo}
+                    editToDo={this.editToDo}
                   />
                 ))
               : searchInput == '' 
@@ -129,6 +182,7 @@ export default class ContainerToDos extends Component {
                       data={todo}
                       updateTodo={this.updateTodo}
                       deleteToDo={this.deleteToDo}
+                      editToDo={this.editToDo}
                     />
                   ))
                 :

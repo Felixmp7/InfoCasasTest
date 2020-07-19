@@ -9,8 +9,8 @@
   /* border: 2px solid; */
   display: flex;
   flex-direction: column;
-  height: 250px;
-  justify-content: space-between;
+  height: 70vh;
+  justify-content: space-evenly;
 }
 
 .todoList {

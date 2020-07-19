@@ -1,7 +1,8 @@
 import React from 'react'
-import Card from '@material-ui/core/Card';
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import CardContent from '@material-ui/core/CardContent';
+import InputBase from "@material-ui/core/InputBase";
 import styles from './css/ToDoItem.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -11,9 +12,9 @@ import {
   mdiCheckboxMarkedCircle,
 } from "@mdi/js";
 
-export const ToDoItem = ({data, updateTodo, deleteToDo}) => {
+export const ToDoItem = ({data, updateTodo, deleteToDo, editToDo}) => {
   return (
-    <Card className={styles.cardContainer} variant="outlined">
+    <div className={styles.cardContainer}>
       <CardContent>
         <div
           className={styles.containerButton}
@@ -26,20 +27,19 @@ export const ToDoItem = ({data, updateTodo, deleteToDo}) => {
                 : mdiCheckboxBlankCircleOutline
             }
             size={1}
-            color="#34fcb9"
+            color="#414288"
           />
         </div>
         <Typography className={styles.task} color="textSecondary" gutterBottom>
           {`task n° ${data.id}`}
         </Typography>
-        <Typography
-          className={styles.title}
-          variant="h5"
-          component="h2"
-          gutterBottom
-        >
-          {data.title}
-        </Typography>
+        <div className={styles.title}>
+          <InputBase
+            id={String(data.id)}
+            value={data.title}
+            onChange={(event) => editToDo(event.target.value, data.id)}
+          />
+        </div>
         <Typography className={styles.completed} color="textSecondary">
           {`status: ${data.completed ? "completed" : "pending"}`}
         </Typography>
@@ -47,6 +47,6 @@ export const ToDoItem = ({data, updateTodo, deleteToDo}) => {
       <IconButton onClick={() => deleteToDo(data.id)} aria-label="delete">
         <DeleteIcon />
       </IconButton>
-    </Card>
+    </div>
   );
 }
