@@ -17,6 +17,7 @@ const CreateTodo = ({updateToDoInState}) => {
 
   const sendData = () => {
     createNewTodo(title);
+    setTitle('');
     updateToDoInState(title);
     console.log(title)
   }
