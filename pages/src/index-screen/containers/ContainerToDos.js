@@ -1,12 +1,16 @@
+// Dependencies
 import React, { Component } from 'react'
+// Components
 import CreateTodo from "../components/create_todo/CreateTodo";
 import {SearchBar} from "../components/search_bar/SearchBar";
-import styles from './ContainerToDos.module.css'
+import { ToDoItem } from "../components/todo_list/ToDoItem";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
+// Methods
 import { deleteTodo, updateStatusTodo } from "../../../api/jsonApi";
-import { ToDoItem } from "../components/todo_list/ToDoItem";
+// CSS
+import styles from './ContainerToDos.module.css'
 
 export default class ContainerToDos extends Component {
   state = {

@@ -1,4 +1,6 @@
+// Dependencies
 import React from 'react'
+// CSS
 import styles from './css/Header.module.css'
 
 const Header = ({}) => {

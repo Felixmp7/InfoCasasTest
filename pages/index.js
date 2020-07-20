@@ -1,3 +1,4 @@
+// Components
 import Head from 'next/head'
 import Header from './src/index-screen/components/header/Header'
 import ContainerToDos from './src/index-screen/containers/ContainerToDos';

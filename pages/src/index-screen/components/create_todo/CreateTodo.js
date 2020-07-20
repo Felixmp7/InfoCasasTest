@@ -1,9 +1,13 @@
+// Dependencies
 import React, {useState} from 'react'
+// Components
 import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+// Methods
 import { createNewTodo } from "../../../../api/jsonApi";
+// CSS
 import styles from './css/CreateTodo.module.css'
 
 const CreateTodo = ({updateToDoInState}) => {

@@ -1,9 +1,10 @@
+// Dependencies
 import React from 'react'
+// Components
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import CardContent from '@material-ui/core/CardContent';
 import InputBase from "@material-ui/core/InputBase";
-import styles from './css/ToDoItem.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Icon from "@mdi/react";
@@ -11,6 +12,8 @@ import {
   mdiCheckboxBlankCircleOutline,
   mdiCheckboxMarkedCircle,
 } from "@mdi/js";
+// CSS
+import styles from './css/ToDoItem.module.css'
 
 export const ToDoItem = ({data, updateTodo, deleteToDo, editToDo}) => {
   return (
