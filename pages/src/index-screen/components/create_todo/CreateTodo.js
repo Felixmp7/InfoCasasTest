@@ -15,11 +15,17 @@ const CreateTodo = ({updateToDoInState}) => {
     // console.log(event.target.value);
   }
 
-  const sendData = () => {
-    createNewTodo(title);
+  const sendData = async () => {
     setTitle('');
-    updateToDoInState(title);
-    console.log(title)
+    const response = await createNewTodo(title);
+    if (response == 'SUCCESS') {
+      updateToDoInState(title);
+      console.log(title)
+      
+    } else {
+      setTitle(title);
+      console.log('Error in create new todo api method')
+    }
   }
 
   return (

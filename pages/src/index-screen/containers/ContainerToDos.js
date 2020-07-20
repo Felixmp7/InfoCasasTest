@@ -4,6 +4,7 @@ import {SearchBar} from "../components/search_bar/SearchBar";
 import styles from './ContainerToDos.module.css'
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
+import { deleteTodo, updateTodo } from "../../../api/jsonApi";
 import { ToDoItem } from "../components/todo_list/ToDoItem";
 
 export default class ContainerToDos extends Component {
@@ -47,40 +48,54 @@ export default class ContainerToDos extends Component {
     }, () => console.log(this.state))
   }
 
-  updateTodo = (id) => {
+  updateStatusTodo = async (id) => {
     const { todos, todosFiltered, searchInput } = this.state;
 
-    if (searchInput) {
-      console.log('Con Búsqueda')
-      const todosFilteredUpdated = todosFiltered.map((todo) => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed;
+    try {
+      const response = await updateTodo(id);
+      if (response == 'SUCCESS') {
+        if (searchInput) {
+          console.log('Con Búsqueda')
+          const todosFilteredUpdated = todosFiltered.map((todo) => {
+            if (todo.id === id) {
+              todo.completed = !todo.completed;
+            }
+            return todo;
+          });
+
+          todosFilteredUpdated.sort((a, b) => b.completed - a.completed);
+
+          
+          this.setState({
+            todosFiltered: todosFilteredUpdated,
+          });
+        } 
+        else {
+          console.log("Sin Búsqueda");
+
+          const todosUpdated = todos.map(todo => {
+            if (todo.id === id) {
+              todo.completed = !todo.completed
+            }
+            return todo;
+          })
+          
+          todosUpdated.sort((a, b) => b.completed - a.completed);
+          this.setState({
+            todos: todosUpdated,
+          });
         }
-        return todo;
-      });
-
-      todosFilteredUpdated.sort((a, b) => b.completed - a.completed);
-
+      } 
+      else {
+        console.log('Error in api updateTodo method');
+      }
       
-      this.setState({
-        todosFiltered: todosFilteredUpdated,
-      });
-    } 
-    else {
-      console.log("Sin Búsqueda");
-
-      const todosUpdated = todos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-        }
-        return todo;
-      })
-      
-      todosUpdated.sort((a, b) => b.completed - a.completed);
-      this.setState({
-        todos: todosUpdated,
-      });
+    } catch (error) {
+      console.log(error)
     }
+
+
+    
   }
 
   deleteToDo = (id) => {
@@ -170,7 +185,7 @@ export default class ContainerToDos extends Component {
                   <ToDoItem
                     key={todo.id}
                     data={todo}
-                    updateTodo={this.updateTodo}
+                    updateTodo={this.updateStatusTodo}
                     deleteToDo={this.deleteToDo}
                     editToDo={this.editToDo}
                   />
@@ -180,7 +195,7 @@ export default class ContainerToDos extends Component {
                     <ToDoItem
                       key={todo.id}
                       data={todo}
-                      updateTodo={this.updateTodo}
+                      updateTodo={this.updateStatusTodo}
                       deleteToDo={this.deleteToDo}
                       editToDo={this.editToDo}
                     />
