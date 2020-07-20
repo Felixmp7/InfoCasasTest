@@ -15,7 +15,7 @@ export const createNewTodo = async (title) => {
       },
     })
 
-    if (serverResponse.status == 201) {
+    if (serverResponse.status != 404) {
       response = 'SUCCESS';
 
     }
@@ -32,7 +32,7 @@ export const createNewTodo = async (title) => {
 export const deleteTodo = async (id) => {
 
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/todos${id}`, {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
       method: "DELETE"
     })
   
@@ -42,29 +42,33 @@ export const deleteTodo = async (id) => {
   }
   
 }
-export const updateTodo = async (title, id) => {
+export const updateStatusTodo = async (status, id) => {
+  console.log(status);
   let response;
 
   const data = {
-    title,
-    userId: 1,
+    completed: status
   };
 
   try {
-    const serverResponse = await fetch(`https://jsonplaceholder.typicode.com/todos${id}`, {
-      method: 'PUT',
+    const serverResponse = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+      method: 'PATCH',
       body: JSON.stringify(data),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
+    console.log(serverResponse)
 
-    if (serverResponse.status == 201) {
+    if (serverResponse.status != 404) {
       response = 'SUCCESS';
     }
     else response = 'FAIL'
+
+    return response;
   } catch (error) {
     console.log(error)
+    return response = 'ERROR' ;
   }
 
 }

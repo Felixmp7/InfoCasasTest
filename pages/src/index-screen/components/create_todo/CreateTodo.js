@@ -15,6 +15,10 @@ const CreateTodo = ({updateToDoInState}) => {
     // console.log(event.target.value);
   }
 
+  const handleKeyPressed = (event) => {
+    if (event.key === 'Enter') sendData();
+  }
+
   const sendData = async () => {
     setTitle('');
     const response = await createNewTodo(title);
@@ -40,6 +44,7 @@ const CreateTodo = ({updateToDoInState}) => {
             label="Enter your todo title"
             placeholder="eg: implement header section"
             value={title}
+            onKeyUp={handleKeyPressed}
             onChange={handleTitleChange}
           />
         </div>

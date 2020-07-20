@@ -3,6 +3,8 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  /* border: 2px solid; */
+
 }
 
 .leftColumnContainer {
@@ -13,7 +15,87 @@
   justify-content: space-evenly;
 }
 
+.containerToDoList {
+  /* border: 2px solid; */
+  width: 420px;
+  height: 75vh;
+
+}
+
 .todoList {
-  max-height: 70vh;
+  height: 85%;
   overflow: auto;
+}
+
+.containerHeader {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.containerButtons {
+  /* width: 50%; */
+  /* border: 2px solid; */
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.completeButton,
+.pendingButton,
+.completeButtonSelected,
+.pendingButtonSelected {
+  border-style: none;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.completeButton:hover , .pendingButton:hover {
+  cursor: pointer;
+  outline: none;
+}
+.completeButtonSelected:focus,
+.pendingButtonSelected:focus,
+.completeButtonSelected:active,
+.pendingButtonSelected:active {
+  /* cursor: pointer; */
+  outline: none;
+  /* border: none; */
+}
+
+
+.completeButton {
+  margin-right: 10px;
+  border: 1px solid #31419f55;
+  font-size: 12px;
+  background-color: #fff;
+  color: #31419f55;
+  font-weight: 600;
+}
+.completeButtonSelected {
+  margin-right: 10px;
+  border: 1px solid #31419f;
+  font-size: 12px;
+  background-color: #31419f22;
+  color: #31419f;
+  font-weight: 600;
+}
+.pendingButton {
+  /* margin-right: 10px; */
+  border: 1px solid #77777722;
+  font-size: 12px;
+  background-color: #fff;
+  color: #77777788;
+  font-weight: 600;
+}
+.pendingButtonSelected {
+  /* margin-right: 10px; */
+  border: 1px solid #777777;
+  font-size: 12px;
+  background-color: #77777722;
+  color: #777;
+  font-weight: 600;
 }

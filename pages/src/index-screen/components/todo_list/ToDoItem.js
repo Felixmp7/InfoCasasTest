@@ -35,6 +35,7 @@ export const ToDoItem = ({data, updateTodo, deleteToDo, editToDo}) => {
         </Typography>
         <div className={styles.title}>
           <InputBase
+            fullWidth
             id={String(data.id)}
             value={data.title}
             onChange={(event) => editToDo(event.target.value, data.id)}
